@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",
-    "start": "node index.js"
+    "start": "node index.js",
+    "build": "rm -rf dist/ && tsc && npm run build:copy-assets && npm run build:compile-views",
+    "build:copy-assets": "cp -R src/public dist/",
+    "build:compile-views": "pug -O '{\"basedir\": \"src/views\"}' -o dist/views src/views/*.pug"
   },
   "keywords": [],
   "author": "",
