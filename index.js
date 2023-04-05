@@ -40,7 +40,7 @@ app.post("/pay", async (req, res) => {
     })
   }
 });
-app.get('/', () => {
+app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 // ROUTES
