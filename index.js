@@ -20,11 +20,15 @@ app.get('/config', (req, res) => {
 })
 
 app.post("/pay", async (req, res) => {
+  const { final, price, email, id, name, finalDuration } = req.body;
   try {    
     const paymentIntent = await stripe.paymentIntents.create({
       currency: "cad",
-      amount: 1999,
-      payment_method_types: ["card"]
+      amount: final,
+      automatic_payment_methods: {
+        enabled: true
+      },
+      metadata: { final, price, email, id, name, finalDuration },
     })
     const clientSecret = paymentIntent.client_secret;
     res.json({ message: "Payment initiated", clientSecret });
