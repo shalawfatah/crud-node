@@ -40,7 +40,9 @@ app.post("/pay", async (req, res) => {
     })
   }
 });
-
+app.get('/', () => {
+  res.send('Hello World!')
+})
 // ROUTES
 app.use('/api/notes', notesRouter);
 
