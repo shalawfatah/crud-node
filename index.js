@@ -10,9 +10,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // STRIPE 
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY, {
-    apiVersion: "2023-01-01"
-})
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 
 // STRIPE ROUTES
 app.get('/config', (req, res) => {
