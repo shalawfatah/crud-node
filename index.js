@@ -3,6 +3,7 @@ const notesRouter = require('./routes/notes');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const connection = require('./db/connect')
+const Stripe = require("stripe");
 
 const app = express();
 app.use(cors());
