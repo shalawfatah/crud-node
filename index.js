@@ -20,6 +20,7 @@ app.get('/config', (req, res) => {
 })
 
 app.post("/pay", async (req, res) => {
+  console.log(req.body)
   try {    
     const paymentIntent = await stripe.paymentIntents.create({
       currency: "cad",
