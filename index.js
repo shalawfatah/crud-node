@@ -20,24 +20,23 @@ app.get('/config', (req, res) => {
 })
 
 app.post("/pay", async (req, res) => {
-    try {
-      const { final, price, email, id, name, finalDuration } = req.body;
-      if (!final) return res.status(400).json({ message: "Price must be valid" });
-      const paymentIntent = await stripe.paymentIntents.create({
-        amount:final,
-        currency: "CAD",
-        automatic_payment_methods: {
-          enabled: true
-        },
-        metadata: { final, price, email, id, name, finalDuration },
-      });
-      const clientSecret = paymentIntent.client_secret;
-      res.json({ message: "Payment initiated", clientSecret });
-    } catch (err) {
-      console.error(err);
-      res.status(500).json({ message: "Internal server error" });
-    }
-  });
+  try {    
+    const paymentIntent = await stripe.paymentIntents.create({
+      currency: "CAD",
+      amount: 1999,
+      automatic_payment_methods: {
+        enable: true
+      }
+    })
+    res.send({clientSecret: paymentIntent.clientSecret})
+  } catch (e) {
+    return res.status(400).send({
+      error: {
+        message: e.message
+      }
+    })
+  }
+});
 
 // ROUTES
 app.use('/api/notes', notesRouter);
