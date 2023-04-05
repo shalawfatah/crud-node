@@ -26,7 +26,7 @@ app.post("/pay", async (req, res) => {
       amount: 1999,
       payment_method_types: ["card"]
     })
-    res.send({clientSecret: paymentIntent.clientSecret})
+    res.send({clientSecret: paymentIntent.client_secret})
   } catch (e) {
     return res.status(400).send({
       error: {
