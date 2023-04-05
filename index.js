@@ -20,7 +20,7 @@ app.get('/config', (req, res) => {
 })
 
 app.post("/pay", async (req, res) => {
-  console.log(req.body)
+  const data = req.body;
   try {    
     const paymentIntent = await stripe.paymentIntents.create({
       currency: "cad",
@@ -30,7 +30,7 @@ app.post("/pay", async (req, res) => {
       },
     })
     const clientSecret = paymentIntent.client_secret;
-    res.json({ message: "Payment initiated", clientSecret });
+    res.json({ message: "Payment initiated", clientSecret, data });
   } catch (e) {
     return res.status(400).send({
       error: {
