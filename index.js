@@ -28,7 +28,9 @@ app.post("/pay", async (req, res) => {
       const paymentIntent = await stripe.paymentIntents.create({
         amount:final,
         currency: "CAD",
-        payment_method_types: ["card"],
+        automatic_payment_methods: {
+          enabled: true
+        },
         metadata: { final, price, email, id, name, finalDuration },
       });
       const clientSecret = paymentIntent.client_secret;
